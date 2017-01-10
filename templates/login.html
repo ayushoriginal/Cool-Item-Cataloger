@@ -1,0 +1,57 @@
+{% extends 'application.html' %}
+{% block content %}
+  <!--  G+ sign-in button -->
+  <div id="signInButton">
+    <span class="g-signin"
+      data-scope="openid email"
+      data-clientid="64630628091-1drabbaf76kmtfkkudq9o5sqos55q24q.apps.googleusercontent.com"
+      data-redirecturi="postmessage"
+      data-accesstype="offline"
+      data-cookiepolicy="single_host_origin"
+      data-callback="signInCallback"
+      data-approvalprompt="force">
+    </span>
+  </div>
+  <!--  End G+ sign-in button -->
+  <div id="result">
+  </div>
+{% endblock %}
+
+
+{% block gplus %}
+<script src="//apis.google.com/js/platform.js?onload=start">
+</script>
+
+<script>
+
+function signInCallback(authResult) {
+  if (authResult['code']) {
+    // Hide the sign-in button now that the user is authorized
+    $('#signinButton').attr('style', 'display: none');
+    // Send the one-time-use code to the server, if the server responds, write
+    // a 'login successful' message to the web page and then redirect back to
+    // the main page of the application
+    $.ajax({
+      type: 'POST',
+      url: '/gconnect?state={{STATE}}',
+      processData: false,
+      data: authResult['code'],
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response if necessary.
+        if (result) {
+          $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+         setTimeout(function() {
+          window.location.href = "/";
+         }, 4000);
+
+      } else if (authResult['error']) {
+    console.log('There was an error: ' + authResult['error']);
+  } else {
+        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+         }
+      }
+
+  }); } }
+</script>
+{% endblock %}
