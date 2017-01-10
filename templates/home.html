@@ -1,0 +1,36 @@
+{% extends 'application.html' %}
+
+{% block category_actions %}
+    <div class="row category-actions">
+      <div class="col-xs-12">
+        <a href="{{url_for('newCategory')}}"
+           class="btn btn-success">
+          New Category
+        </a>
+      </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="latest-items
+                col-xs-12
+                col-sm-9">
+      <h2>
+        Latest Items
+      </h2>
+      {% for item in latest_items %}
+        <div class="item">
+          <a href="{{url_for('showItem',
+                             category_name=item.category.name,
+                             item_name=item.name)}}">
+            {{item.name.capitalize()}}
+          </a>
+          <span class="text-muted">
+            <em>
+              ({{item.category.name.capitalize()}})
+            </em>
+          </span>
+        </div>
+      {% endfor %}
+    </div>
+{% endblock %}
