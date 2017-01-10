@@ -1,0 +1,37 @@
+.category-actions {
+  margin: 15px -8px 0;
+}
+
+.navbar {
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.alert {
+  border-radius: 0;
+}
+
+.panel {
+  margin-top: 10px;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.item {
+  font-size: 1.1em;
+  padding: 5px 0;
+}
+
+.list-group a{
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+form {
+  padding: 0 15px;
+}
