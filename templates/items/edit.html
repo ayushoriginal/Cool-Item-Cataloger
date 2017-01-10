@@ -1,0 +1,48 @@
+{% extends 'application.html' %}
+{% block content %}
+<h2>Edit {{item_name.capitalize()}}</h2>
+<div class="col-xs-12">
+  <form action="{{url_for('editItem',
+                          category_name=category_name,
+                          item_name=item_name)}}"
+        method="post"
+        class="form-horizontal">
+    <div class="form-group
+                {{'has-error' if errors and errors['name']}}">
+      <label for="name">
+        Name:
+      </label>
+      <input type='text'
+             name='name'
+             id="name"
+             value="{{params['name']}}"
+             class="form-control">
+      {% if errors and errors['name'] %}
+        <span class="help-block
+                     text-danger">
+          {{errors['name']}}
+        </span>
+      {% endif %}
+    </div>
+
+    <div class="form-group
+                {{'has-error' if errors and errors['description']}}">
+      <label for="description">
+        Description:
+      </label>
+      <textarea name='description'
+                id="description"
+                class="form-control">{{params['description']}}</textarea>
+      {% if errors and errors['description'] %}
+        <span class="help-block
+                     text-danger">
+          {{errors['description']}}
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <input type='submit' value='Edit'>
+    </div>
+  </form>
+</div>
+{% endblock %}

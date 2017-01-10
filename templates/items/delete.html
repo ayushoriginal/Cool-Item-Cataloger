@@ -1,0 +1,35 @@
+{% extends 'application.html' %}
+{% block content %}
+  <div class="latest-items
+              col-xs-12">
+    <h2>
+      Confirm to Delete "{{item_name.capitalize()}}" Item
+    </h2>
+    <p>
+      This operation will delete the item <strong>{{item_name.capitalize()}}
+      </strong>. Are you sure?
+    </p>
+    <form action="{{url_for('deleteItem',
+                            category_name=category_name,
+                            item_name=item_name)}}"
+                            method ="post"
+                            class="form-horizontal">
+      <hr>
+      <div class="form-group">
+      <button type="submit"
+              class="btn
+                     btn-danger">
+          I am sure, delete it!
+        </button>
+        <a href = "{{ url_for('showItem',
+                              category_name = category_name,
+                              item_name=item_name)}}"
+           class="btn
+                  btn-success"
+           role="button">
+          Oh, no! Let me think again.
+        </a>
+      </div>
+    </form>
+  </div>
+{% endblock %}
