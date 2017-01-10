@@ -1,0 +1,49 @@
+{% extends 'application.html' %}
+
+{% block category_actions %}
+  <div class="row category-actions">
+    <div class="col-xs-12">
+      <a href="{{url_for('newCategory')}}"
+         class="btn btn-success">
+        New Category
+      </a>
+      <a href="{{url_for('editCategory', category_name=category_name)}}"
+         class="btn btn-success">
+        Edit Category
+      </a>
+      <a href="{{url_for('deleteCategory', category_name=category_name)}}"
+         class="btn btn-danger">
+        Delete Category
+      </a>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+    <div class="items
+                col-xs-12
+                col-sm-9">
+      <h2>
+        {{category_name.capitalize()}} Items
+      {% if user_logged_in %}
+        <a href="{{url_for('newItem',
+                           category_name=category_name)}}"
+           class="btn
+                  btn-default"
+           role="button">
+          <strong>+</strong>
+        </a>
+      {% endif %}
+    </h2>
+      {% for item in filtered_items %}
+        <div class="item">
+          <a href="{{url_for('showItem',
+                             category_name=item.category.name,
+                             item_name=item.name)}}">
+            {{item.name.capitalize()}}
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

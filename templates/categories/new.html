@@ -1,0 +1,40 @@
+{% extends 'application.html' %}
+{% block content %}
+  <div class="col-xs-12">
+    <h2>
+      New Category
+    </h2>
+    <form method="post"
+          class="form-horizontal">
+      <div class="form-group
+                 {{'has-error' if errors and errors['name']}}">
+        <label for="name"
+               class="control-label">
+          Name:
+        </label>
+        <input type='text'
+               name='name'
+               id="name"
+               class="form-control"
+               value="{{values['name'].capitalize() if values and values['name']}}">
+          {% if errors and errors['name'] %}
+            <span class="help-block
+                         text-danger">
+              {{errors['name']}}
+            </span>
+          {% endif %}
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-default">
+          Create category
+        </button>
+        <a href="{{url_for('home')}}"
+           class="btn btn-info"
+           role="button">
+          Cancel
+        </a>
+        </button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

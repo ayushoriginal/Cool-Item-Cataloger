@@ -1,0 +1,53 @@
+{% extends 'application.html' %}
+
+{% block category_actions %}
+  <div class="row category-actions">
+    <div class="col-xs-12">
+      <a href="{{url_for('newCategory')}}"
+         class="btn btn-success">
+        New Category
+      </a>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+    <div class="col-xs-12">
+      <h2>Edit Category</h2>
+      <form method="post"
+            action="{{url_for('editCategory', category_name=category.name)}}"
+            class="form-horizontal">
+        <div class="form-group
+                   {{'has-error' if errors and errors['name']}}">
+          <label for="name"
+                 class="control-label">
+            Name:
+          </label>
+          <input type='text'
+                 name='name'
+                 id="name"
+                 placeholder="{{category.name.capitalize()}}"
+                 class="form-control"
+                 value="{{values['name'].capitalize() if values and values['name']}}">
+            {% if errors and errors['name'] %}
+              <span class="help-block
+                           text-danger">
+                {{errors['name']}}
+              </span>
+            {% endif %}
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">
+            Edit category
+          </button>
+          <a href="{{url_for('home')}}"
+             class="btn btn-info"
+             role="button">
+            Cancel
+          </a>
+          </button>
+        </div>
+      </form>
+  </div>
+{% endblock %}
